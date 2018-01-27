@@ -1,6 +1,6 @@
-## `doctype`是干啥的？
+## `DOCTYPE`是干啥的？
 
-`doctype`是文档类型的缩写，是 HTML5 中用来区分**标准兼容模式**、**怪异模式**的声明，告诉浏览器用标准兼容模式解析并渲染文档。
+`DOCTYPE`是文档类型的缩写，是 HTML5 中用来区分**标准兼容模式**、**怪异模式**的声明，告诉浏览器用标准兼容模式解析并渲染文档。
 
 > 提示：只要在你文档的最前面添加`<!DOCTYPE html>`就可以了。
 
@@ -114,3 +114,29 @@
 1. 尽早的下载 CSS 文件（放在`<head>`里面），并尽可能减小其大小;
 2. 最好给`<script>`标签添加`defer`和`async`属性避免阻塞；
 3. 如果`<script>`标签不添加异步属性，也要最好放置在`<body>`最后，这样的话：即使其阻塞了后续 HTML 的解析，但由于后面并没有可渲染内容，所以只要是 CSSOM 树已经构建完毕了（上面的第一条原则也是为了早点下载，早点构建 CSSOM），JS 也没有在执行的话，直接根据当前的渲染树进行布局（Layout）并绘制（Paint），即不会阻止页面渲染！
+
+**参考**：
+
+1. [https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp)
+
+## 什么是渐进式渲染？
+
+渐进式渲染是一项尽快渲染网页内容，从而提高网页性能（其实是降低感知上的加载时间）的技术。并且移动互联网的兴起，其依然非常重要。
+
+比如这些技术：
+
+* 图片懒加载：网页中的图片不会一次性全部加载，而是当图片出现在设备视窗中之后才去加载。
+* 局部加载：首次打开页面的时候仅加载最基本的 CSS、内容、JS 来降低等待时间，然后在利用推迟加载的 JS 加载剩余内容。
+
+**参考**：
+
+1. [https://stackoverflow.com/questions/33651166/what-is-progressive-rendering](https://stackoverflow.com/questions/33651166/what-is-progressive-rendering)
+
+## 你有用过哪些 HTML 模板语言？
+
+个人用过的有 EJS、Handlebars、Freemarker、Velocity、ArtTemplate
+
+## 其他问题
+
+* [https://neal.codes/blog/front-end-interview-questions-html/](https://neal.codes/blog/front-end-interview-questions-html/)
+* [http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/](http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/)
