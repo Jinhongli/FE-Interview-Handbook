@@ -50,7 +50,7 @@
 1. [http://html5doctor.com/html5-custom-data-attributes/](http://html5doctor.com/html5-custom-data-attributes/)
 2. [https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-\*-attributes](https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes)
 
-## 描述 cookie，sessionStorage 和 localStorage 之间的去区别
+## 描述 cookie，sessionStorage 和 localStorage 之间的区别
 
 以上三种都是以键值对形式在客户端存储数据用的技术，并且值的形式只能是字符串。
 
