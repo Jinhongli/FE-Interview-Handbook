@@ -59,3 +59,33 @@
 **参考**
 
 * [http://www.w3school.com.cn/css/css_positioning_floating.asp](http://www.w3school.com.cn/css/css_positioning_floating.asp)
+
+## `z-index`和层叠上下文
+
+当元素出现重叠时，`z-index`属性用于决定谁会覆盖其他元素（通常来说`z-index`较大的元素会覆盖较小的一个）。对于一个已经定位的元素，设置`z-index`会：
+
+1. 指定元素当前层叠上下文的层级
+2. 决定是否创建新的本地层叠上下文
+
+如果不指定`z-index`，那么就按照 DOM 结构的顺序（下面的元素会遮盖上面），但已定位的元素会始终在普通元素上方。
+
+层叠上下文是一种三维概念，指元素在面向用户的方向上（Z 轴）会根据自身属性按照优先级会分为很多层，然后进行堆叠。
+
+在层叠上下文中，子元素的`z-index`值相对于本地上下文，并且与外部的其他元素独立。举个例子：元素 A 上面有一个兄弟元素 B，A 有一个子元素 C，那么即使 C 设置的`z-index`更高，也不会覆盖 B 元素。
+
+层叠上下文堆叠的顺序是先内再外，即当元素的内容层叠完毕之后，再按照元素的层级插入到父级的层叠上下文中。
+
+文档中的层叠上下文由满足下列条件的元素形成（常见的）：
+
+* 根元素（HTML）
+* `z-index`不为`auto`的绝对定位、相对定位、flex-item 元素
+* `position: fixed`的元素
+* `opacity`小于 1 的元素
+* `transform`、`filter`、`perspective`不为`none`的元素
+
+**参考**
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)
+1. [https://css-tricks.com/almanac/properties/z/z-index/](https://css-tricks.com/almanac/properties/z/z-index/)
+2. [https://philipwalton.com/articles/what-no-one-told-you-about-z-index/](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
+3. [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
