@@ -58,7 +58,7 @@
 
 **参考**
 
-* [http://www.w3school.com.cn/css/css_positioning_floating.asp](http://www.w3school.com.cn/css/css_positioning_floating.asp)
+1. [http://www.w3school.com.cn/css/css_positioning_floating.asp](http://www.w3school.com.cn/css/css_positioning_floating.asp)
 
 ## `z-index`和层叠上下文
 
@@ -87,5 +87,40 @@
 
 1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)
 1. [https://css-tricks.com/almanac/properties/z/z-index/](https://css-tricks.com/almanac/properties/z/z-index/)
-2. [https://philipwalton.com/articles/what-no-one-told-you-about-z-index/](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
-3. [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
+1. [https://philipwalton.com/articles/what-no-one-told-you-about-z-index/](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
+1. [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
+
+## 描述下 BFC 是什么
+
+BFC（块格式化上下文），是一个 CSS 布局用的区域（上下文）。可以理解将触发了 BFC 的元素（或者就叫 BFC 元素）比作一个盒子，这个盒子具有以下特性（相比于没有触发 BFC 的元素）：
+
+1. 盒子内元素布局与盒子外元素相互独立（与层叠上下文中计算`z-index`优先级类似）。
+2. 计算盒子高度时，考虑其所有子元素，浮动元素也会参与计算。
+3. 浮动元素与 BFC 元素不会层叠。
+
+BFC 能够解决哪些问题：
+
+1. **外边距折叠：**相邻元素的外边距会发生折叠，取两者中较大值。利用特性 1，使其中一个元素触发 BFC，那么两个元素的布局就会独立，避免外边距重叠。
+2. **清除浮动，计算元素高度：**当一个元素内所有的子元素均是浮动元素时，其高度为 0。利用特性 2，使父元素触发 BFC，会在计算高度时包含浮动元素。
+3. **布局：**常见的两栏布局（固定宽度的侧栏 + 剩余宽度的主栏），侧栏使用浮动之后，就会与主栏发生层叠。利用特性 3，使主栏触发 BFC，占据容器剩余宽度。
+
+什么条件下会触发 BFC：
+
+* 根元素`<html>`
+* `float`不为`none`的元素
+* `overflow`不为`visible`的元素
+* `position`为`absolute`或`fixed`的元素
+* `display`为`inline-block`，`table-cell`，`table-caption`，`flex`，`inline-flex`的元素'
+
+**参考**
+
+1. [https://segmentfault.com/a/1190000005116275](https://segmentfault.com/a/1190000005116275)
+2. [http://www.html-js.com/article/1866](http://www.html-js.com/article/1866)
+
+## 清除浮动都有哪些手段，分别适用于什么情况？
+
+1. 添加空`div`元素：`<div style="clear: both;"></div>`
+2. 使用`clearfix`：把`clear`属性写在隐藏的`::after`伪元素上
+3. 利用 BFC：对父元素设置`overflow: auto`或者`overflow: hidden`
+
+最好用`clearfix`的方式，因为另外两种都会带来一定的副作用：额外的元素；对内部布局产生影响。
