@@ -124,3 +124,49 @@ BFC 能够解决哪些问题：
 3. 利用 BFC：对父元素设置`overflow: auto`或者`overflow: hidden`
 
 最好用`clearfix`的方式，因为另外两种都会带来一定的副作用：额外的元素；对内部布局产生影响。
+
+## 解释下什么是 CSS 雪碧图，以及你会如何实现？
+
+CSS 雪碧图是指将多个图片合并为一个图片的技术，通常用于 icon 图片。
+
+1. 使用雪碧图制作工具或这 PhotoShop，将多个图片放在一个图片中。
+2. 通过`background-image`，`background-position`来控制如何显示图片。
+
+雪碧图的优点：
+
+* 减小 HTTP 请求次数（HTTP2 不再有并发限制，所以不存在此问题）
+
+**参考**
+
+1. [https://css-tricks.com/css-sprites/](https://css-tricks.com/css-sprites/)
+2. [https://docs.google.com/presentation/d/1r7QXGYOLCh4fcUq0jDdDwKJWNqWK1o4xMtYpKZCJYjM/present?slide=id.p19](https://docs.google.com/presentation/d/1r7QXGYOLCh4fcUq0jDdDwKJWNqWK1o4xMtYpKZCJYjM/present?slide=id.p19)
+
+## 视觉上隐藏元素的方法都有哪些？
+
+与无障碍（可访问性）功能有点关系（a11y）。
+
+* `visibility: hidden`：元素虽然看不见，但依然会在文档流中并占据位置。
+* `width: 0; height: 0;`：让元素在文档流中占据位置为 0，视觉上也就看不到。
+* `position: absolute; left: -99999px`：让元素脱离文档流并移出屏幕外。
+* `text-indent: -9999px`：将文字移出屏幕外。（仅作用于块级元素内的文字）
+* 元数据：例如使用 Schema.org，RDF 以及 JSON-LD。
+* WAI-ARIA：专门用于无障碍功能技术（Bootstrap 中`role`和`aria-*`属性）
+
+**参考**
+
+1. [http://www.zhangxinxu.com/wordpress/2012/03/wai-aria-%E6%97%A0%E9%9A%9C%E7%A2%8D%E9%98%85%E8%AF%BB/](http://www.zhangxinxu.com/wordpress/2012/03/wai-aria-%E6%97%A0%E9%9A%9C%E7%A2%8D%E9%98%85%E8%AF%BB/)
+2. [http://a11yproject.com/](http://a11yproject.com/)
+
+## 编写高效 CSS 需要注意哪些问题？
+
+首先，浏览器匹配 CSS 选择器的顺序是从右到左（最右的选择器成为关键选择器）。浏览器首先根据关键选择器筛选 DOM 中的元素，然后再向上遍历其祖先元素检查选择器是否匹配。因此：
+
+1. 避免最后的关键选择器是标签选择器或这通用选择器，以减少筛选结果的数量。
+2. 使用更短的选择器规则，以加快匹配速度。
+
+注意 CSS 属性是否会引起的重排（reflow）以及重汇（repaint）。尤其要尽可能的避免重排，因为其对性能损耗非常大（浏览器布局 Layout 需要花费的时间非常大）。
+
+**参考**
+
+1. [https://developers.google.com/web/fundamentals/performance/rendering/](https://developers.google.com/web/fundamentals/performance/rendering/)
+2. [https://csstriggers.com/](https://csstriggers.com/)
