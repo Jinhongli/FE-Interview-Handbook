@@ -170,3 +170,41 @@ CSS 雪碧图是指将多个图片合并为一个图片的技术，通常用于 
 
 1. [https://developers.google.com/web/fundamentals/performance/rendering/](https://developers.google.com/web/fundamentals/performance/rendering/)
 2. [https://csstriggers.com/](https://csstriggers.com/)
+
+## 使用 CSS 预处理器的优点
+
+优点：
+
+* CSS 可维护性更好
+* 嵌套选择器写起来更方便
+* 可以定义使用变量
+* 使用混入（mixin）的方式实现代码复用
+* 将 CSS 分为更多文件（使用`@import`的方式本就可以讲 CSS 分为多个文件，但是会造成更多的 HTTP 请求）
+
+## 如何在网页中使用非标准的字体
+
+使用`@font-face`下载该字体，并定义`font-family`和`font-weight`。
+
+## 描述下浏览器如何将元素匹配到相应的选择器规则
+
+在上面有效的CSS问题中已经说过，浏览器时从右到左进行匹配：首先通过最右的关键选择器过滤元素，然后向其祖先元素遍历看是否符合规则。
+
+例如对于选择器`p span`，浏览器会首先找到所有的`<span>`元素，然后向祖先元素进行遍历，查找`<p>`元素。一旦找到存在，就视为符合选择器并会立刻停止继续向上遍历。
+
+## 描述下盒模型
+
+浏览器在对页面中的元素进行布局时，每一个元素会被视为一个矩形的盒子，每个盒子包括：内容，内边距，边框，外边距。
+
+盒模型用于：
+
+1. 一个元素占据的位置
+2. 边框和外边距是否折叠
+3. 盒子的尺寸
+
+盒模型尺寸计算公式：内容 + 内边距 + 边框 + 外边距
+
+注意，CSS中的`width`和`height`默认设置的是内容的宽高，可以通过`box-sizing`设置。
+
+**参考**
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model](https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model)
