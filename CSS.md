@@ -225,3 +225,38 @@ CSS 雪碧图是指将多个图片合并为一个图片的技术，通常用于 
 | **`vertical-align`** | 否                                | 是                         | 是               |
 | **设置内外边距**     | 是                                | 只有水平方向的内外边距有效 | 是               |
 | **浮动**             | -                                 | 浮动后可以设置内外边距     | -                |
+
+## 都有哪些定位的属性，分别有什么不同？
+
+元素定位通过`position`属性设置，包括`static`（默认值），`relative`，`absolute`和`fixed`，后三种属性的元素又称为已定位元素，可以使用`top`，`left`，`bottom`，`right`设定元素位置（如果不设置，就会在原来文档流中的位置）；可以使用`z-index`设定元素层级。
+
+- `static`：元素默认的定位方式，即普通文档流中的位置。此时设置`top`，`left`，`bottom`，`right`和`z-index`不起作用。
+- `relative`：相对定位，相对于自身原来进行偏离；元素占据的位置仍然在普通文档流中。
+- `absolute`：绝对定位，相对于已经定位的祖先元素进行定位；元素脱离文档流；元素宽高默认内容决定。
+- `fixed`：固定定位，相对于视窗进行定位，不随页面滚动而改变；元素脱离文档流；元素宽高默认内容决定。
+
+**提示**
+
+已经为元素除了可以使用`width`和`height`设置其宽高外，还可以同时指定`left`和`right`，`top`和`bottom`分别设置宽和高。
+
+**参考**
+
+1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/position](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)
+
+## 有接触过CSS`flex`布局以及栅格布局么？
+
+了解过`flex`布局，但是没有熟悉到每一个属性的作用以及写法。其优点就是功能强大，就像布局的一颗银弹，可以几乎适应所有的布局方式（固定宽度，自适应宽度，垂直排列，多栏布局。。。）。但其最大的缺点就是兼容性。
+
+栅格布局就是提前将网页分割为多个栅格（一般是12），然后再通过设置元素占据的栅格数来布局。优点是适用于所有设备，兼容性较好，如广为人知的Bootstrap。但栅格说白了就是百分比布局，所以不适用于所有布局情况。
+
+## 响应式（responsive）和自适应（adaptive）有什么区别？
+
+首先这两种技术的目的都是能够在不同设备、不同分辨率下都得到非常好的显示效果。
+
+响应式通过`media query`、栅格、百分比、rem等技术，让网页在任何设备上达到最好的显示效果。
+
+自适应则更像是渐进式增强，通过获取当前设备的特征，然后设置预定义的视图大小和其他特性，提供合适的功能和布局。
+
+**参考**
+
+1. [https://css-tricks.com/the-difference-between-responsive-and-adaptive-design/](https://css-tricks.com/the-difference-between-responsive-and-adaptive-design/)
