@@ -86,9 +86,9 @@
 **参考**
 
 1. [https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)
-1. [https://css-tricks.com/almanac/properties/z/z-index/](https://css-tricks.com/almanac/properties/z/z-index/)
-1. [https://philipwalton.com/articles/what-no-one-told-you-about-z-index/](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
-1. [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
+2. [https://css-tricks.com/almanac/properties/z/z-index/](https://css-tricks.com/almanac/properties/z/z-index/)
+3. [https://philipwalton.com/articles/what-no-one-told-you-about-z-index/](https://philipwalton.com/articles/what-no-one-told-you-about-z-index/)
+4. [https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context)
 
 ## 描述下 BFC 是什么
 
@@ -263,4 +263,4 @@ CSS 雪碧图是指将多个图片合并为一个图片的技术，通常用于 
 
 ## 相比于使用`absolute`定位，使用`translate()`有哪些好处？
 
-`translate()`和`opacity`不会引起浏览器的重绘以及重排。浏览器只会重新组合（composition）。但是改变绝对定位元素的位置会造成重绘。
+`translate()`和`opacity`不会引起浏览器的重绘以及重排。浏览器只会重新组合（composition）。但是改变绝对定位元素的位置会造成重绘。所以使用`translate()`的方式性能更高。
