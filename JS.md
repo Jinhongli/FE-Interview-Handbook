@@ -69,3 +69,59 @@
 **注意：**
 
 在使用`typeof`运算符判断变量是否不存在时，如果变量未声明过，是不会报错的，且返回的也是`undefined`：`typeof notExistVariable === 'undefined'`。所以使用`typeof`时要确认变量是否已经声明过。
+
+## 什么是闭包？闭包都可以用来干什么？
+
+函数闭包是一种特殊的技术，能够让一个函数访问另一个函数的作用域。具体来说就是，函数的作用域都是独立的，但是通过闭包可以实现让函数A中能够使用函数B中的局部变量，即使函数B已经执行完毕。
+
+在JS中，函数作为一等公民，尤为常见。比如：子函数中使用了父函数作用域的变量。
+
+```javascript
+function createCounter(delta){
+  return function(x){
+    return delta + x;
+  }
+}
+
+const counter1 = createCounter(1);
+const counter2 = createCounter(2);
+
+counter1(1); // 2
+counter2(1); // 3
+```
+
+函数`createCounter`执行完毕之后，其局部变量`delta`理应被销毁，但是由于`counter1`和`counter2`两个函数中引用了`delte`，所以`delta`并不会被销毁，而是会被保存在特殊的闭包作用域中，使`counter1`和`counter2`两个函数可以正常运行。
+
+闭包最常见的使用场景就是保存函数的当前执行状态，或者说函数执行时某些变量的值，比如记录上面计数器例子的结果：
+
+```javascript
+function createCounter(delta){
+  let num = 0;
+  return function(){
+    num += delta;
+    console.log(num);
+    return num;
+  }
+}
+
+const counter1 = createCounter(1);
+const counter2 = createCounter(2);
+
+counter1(); // 1
+counter1(); // 2
+counter1(); // 3
+counter2(); // 2
+counter2(); // 4
+counter2(); // 6
+```
+
+初次之外，常见的场景包括：
+
+- 解决`for`循环中变量引用的问题
+- 封装对象（私有属性）
+- 模块化开发
+- 柯里化
+
+**参考：**
+
+1. [https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36)
