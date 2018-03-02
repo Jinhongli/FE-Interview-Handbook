@@ -39,12 +39,25 @@
 
 都是为了 JS 的模块化开发（在 ES6 出现之前）。
 
-- CommonJS 是同步的；而 AMD（Asynchronous Module Definition）是异步的。
-- CommonJS的适合在服务器端运行；而AMD由于是异步的，所以在浏览器端更合适。
-- 从语法上来说，AMD更为细致；而CommonJS更像其他语言中的`import`。并且Node开发中也是CommonJS的写法，避免了在开发中切换语法环境。
-- 现在更为流行的是将所有JS文件打包成一个js文件，所以AMD的这种异步加载模块的方式的作用没有那么大了。
+* CommonJS 是同步的；而 AMD（Asynchronous Module Definition）是异步的。
+* CommonJS 的适合在服务器端运行；而 AMD 由于是异步的，所以在浏览器端更合适。
+* 从语法上来说，AMD 更为细致；而 CommonJS 更像其他语言中的`import`。并且 Node 开发中也是 CommonJS 的写法，避免了在开发中切换语法环境。
+* 现在更为流行的是将所有 JS 文件打包成一个 js 文件，所以 AMD 的这种异步加载模块的方式的作用没有那么大了。
 
-不过现在ES6中已经原生支持JS模块化了，并且支持同步与异步加载。虽然还有浏览器和低版本Node不支持原生ES6模块，但是可以通过转译器（例如Babel）来实现。
+不过现在 ES6 中已经原生支持 JS 模块化了，并且支持同步与异步加载。虽然还有浏览器和低版本 Node 不支持原生 ES6 模块，但是可以通过转译器（例如 Babel）来实现。
 
 **参考：**
+
 1. [https://auth0.com/blog/javascript-module-systems-showdown/](https://auth0.com/blog/javascript-module-systems-showdown/)
+
+## 为什么`function IIFE(){ }();`会报错。如何让这个 IIFE 正确运行？
+
+因为JS引擎会将这条语句分为两部分：`function IIFE(){ }`函数声明和`()`。后面的`()`用于函数执行，但由于没有指定函数名，所以报错`Uncaught SyntaxError: Unexpected token )`。
+
+有多种方式，比如：`(function IIFE(){ })()`和`(function IIFE(){ }())`。
+其原理就是将函数声明转换为函数表达式，然后使用`()`调用。所以不一定用`()`包裹，只要在`function`关键字前面加点东西(一元运算符)，让JS引擎不将其视为函数声明就可以，比如`!`、`~`、`-`以及`+`也可以，就像这样：`!function IIFE(){ }()`。
+
+**参考：**
+
+1. [http://benalman.com/news/2010/11/immediately-invoked-function-expression/](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
+
