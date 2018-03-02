@@ -52,12 +52,20 @@
 
 ## 为什么`function IIFE(){ }();`会报错。如何让这个 IIFE 正确运行？
 
-因为JS引擎会将这条语句分为两部分：`function IIFE(){ }`函数声明和`()`。后面的`()`用于函数执行，但由于没有指定函数名，所以报错`Uncaught SyntaxError: Unexpected token )`。
+因为 JS 引擎会将这条语句分为两部分：`function IIFE(){ }`函数声明和`()`。后面的`()`用于函数执行，但由于没有指定函数名，所以报错`Uncaught SyntaxError: Unexpected token )`。
 
-有多种方式，比如：`(function IIFE(){ })()`和`(function IIFE(){ }())`。
-其原理就是将函数声明转换为函数表达式，然后使用`()`调用。所以不一定用`()`包裹，只要在`function`关键字前面加点东西(一元运算符)，让JS引擎不将其视为函数声明就可以，比如`!`、`~`、`-`以及`+`也可以，就像这样：`!function IIFE(){ }()`。
+有多种方式，比如：`(function IIFE(){ })()`和`(function IIFE(){ }())`。其原理就是将函数声明转换为函数表达式，然后使用`()`调用。所以不一定用`()`包裹，只要在`function`关键字前面加点东西(一元运算符)，让 JS 引擎不将其视为函数声明就可以，比如`!`、`~`、`-`以及`+`也可以，就像这样：`!function IIFE(){ }()`。
 
 **参考：**
 
 1. [http://benalman.com/news/2010/11/immediately-invoked-function-expression/](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
 
+## `null`和`undefined`以及未声明有什么不同？如何判断这些值？
+
+* 未声明是指那些没有使用`var`、`let`以及`const`声明过的变量。直接引用这种变量会导致 JS 报错（`console.log(notExistVariable); // Uncaught ReferenceError: notExistVariable is not defined`）。
+* `undefined`是指变量经过声明，但是却没有赋初始值。可以使用`foo === undefined`以及`typeof foo === 'undefined'`判断。
+* `null`需要明确对变量赋值`var foo = null;`。用来表示不存在。通常对于一个不再需要的变量，就会对其重新赋值为`null`。判断`null`可以用：`!foo && typeof foo === 'object'`。
+
+**注意：**
+
+在使用`typeof`运算符判断变量是否不存在时，如果变量未声明过，是不会报错的，且返回的也是`undefined`：`typeof notExistVariable === 'undefined'`。所以使用`typeof`时要确认变量是否已经声明过。
