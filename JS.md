@@ -72,15 +72,15 @@
 
 ## 什么是闭包？闭包都可以用来干什么？
 
-函数闭包是一种特殊的技术，能够让一个函数访问另一个函数的作用域。具体来说就是，函数的作用域都是独立的，但是通过闭包可以实现让函数A中能够使用函数B中的局部变量，即使函数B已经执行完毕。
+函数闭包是一种特殊的技术，能够让一个函数访问另一个函数的作用域。具体来说就是，函数的作用域都是独立的，但是通过闭包可以实现让函数 A 中能够使用函数 B 中的局部变量，即使函数 B 已经执行完毕。
 
-在JS中，函数作为一等公民，尤为常见。比如：子函数中使用了父函数作用域的变量。
+在 JS 中，函数作为一等公民，尤为常见。比如：子函数中使用了父函数作用域的变量。
 
 ```javascript
-function createCounter(delta){
-  return function(x){
+function createCounter(delta) {
+  return function(x) {
     return delta + x;
-  }
+  };
 }
 
 const counter1 = createCounter(1);
@@ -95,13 +95,13 @@ counter2(1); // 3
 闭包最常见的使用场景就是保存函数的当前执行状态，或者说函数执行时某些变量的值，比如记录上面计数器例子的结果：
 
 ```javascript
-function createCounter(delta){
+function createCounter(delta) {
   let num = 0;
-  return function(){
+  return function() {
     num += delta;
     console.log(num);
     return num;
-  }
+  };
 }
 
 const counter1 = createCounter(1);
@@ -117,10 +117,10 @@ counter2(); // 6
 
 初次之外，常见的场景包括：
 
-- 解决`for`循环中变量引用的问题
-- 封装对象（私有属性）
-- 模块化开发
-- 柯里化
+* 解决`for`循环中变量引用的问题
+* 封装对象（私有属性）
+* 模块化开发
+* 柯里化
 
 **参考：**
 
@@ -129,7 +129,24 @@ counter2(); // 6
 ## 解释下`forEach()`和`map()`有什么不同以及各自的适用场景。
 
 两者都会对数据的每一项执行灰调函数，但是
-- `forEach()`没有返回值；
-- `map()`会返回一个新的数组。（新数组每一项是遍历回调的返回值）
+
+* `forEach()`没有返回值；
+* `map()`会返回一个新的数组。（新数组每一项是遍历回调的返回值）
 
 所以如果想根据一个数组获得一个新的数组，就使用`map`；如果只是想遍历数组，就使用`forEach`。
+
+## 对于`function Person(){}`，`var person = Person()`和`var person = new Person()`有什么不同？
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+var person1 = Person('foo');
+var person2 = new Person('bar');
+```
+
+首先对于`Person`来说，它就是普通的函数，所以重要的是调用这个函数的方式（是否带`new`）。
+
+* 对于不带`new`的普通函数调用，由于`Person`没有指定返回值，所以`person1`等于`undefined`；并且会在全局`window`对象上**意外**的创建一个值为`foo`的变量`name`。
+* 带上`new`的调用，又成为构造函数调用，具体过程为：创建一个空对象，该对象的原型就是构造函数的原型对象；以该对象作为`this`执行构造函数；返回该对象。
