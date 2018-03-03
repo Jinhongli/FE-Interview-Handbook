@@ -125,3 +125,11 @@ counter2(); // 6
 **参考：**
 
 1. [https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36)
+
+## 解释下`forEach()`和`map()`有什么不同以及各自的适用场景。
+
+两者都会对数据的每一项执行灰调函数，但是
+- `forEach()`没有返回值；
+- `map()`会返回一个新的数组。（新数组每一项是遍历回调的返回值）
+
+所以如果想根据一个数组获得一个新的数组，就使用`map`；如果只是想遍历数组，就使用`forEach`。
