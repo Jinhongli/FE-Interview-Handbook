@@ -161,3 +161,22 @@ var person2 = new Person('bar');
 缺点：
 - 前进后退和书签功能需要额外的工作。
 - SEO非常不友好。
+
+## 解释下JSONP的原理
+
+JSONP（JSON with Padding）通常用来解决浏览器中禁止跨域资源访问。
+
+因为`<script>`标签可以跨域访问（事实上带有`src`属性的标签都可以跨域访问，比如`<img>`）的特性，将请求发往跨域的服务器，并携带上已经声明过的回调函数名作为查询参数（通常是`callback`），比如`https://example.com?callback=processData`。服务器端接收到这一请求之后，会生成一个JS文件，内容为调用传入的`processData`函数，并将跨域请求的数据作为实参。
+
+```html
+<script>
+  const processData = data => {
+    doSomeThingWithData(data);
+  };
+</script>
+<script src="https://example.com?callback=processData"></script>
+```
+
+但是JSONP最大的局限性就是只能使用`GET`方法。并且因为是执行跨域的JS脚本，因此有可能存在安全问题。
+
+更推荐的做法是使用CORS，把JSONP作为一种备选。
