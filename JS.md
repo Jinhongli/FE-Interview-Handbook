@@ -151,6 +151,19 @@ var person2 = new Person('bar');
 * 对于不带`new`的普通函数调用，由于`Person`没有指定返回值，所以`person1`等于`undefined`；并且会在全局`window`对象上**意外**的创建一个值为`foo`的变量`name`。
 * 带上`new`的调用，又成为构造函数调用，具体过程为：创建一个空对象，该对象的原型就是构造函数的原型对象；以该对象作为`this`执行构造函数；返回该对象。
 
+## 说一下JSON
+
+JSON是特定语法的字符串，是基于JS的一种语法，但并不是JS的一部分。
+
+JSON的类型包括：`null`，`boolean`，`number`，`string`，`object`，`array`。与JS中的数据类型基本一致（注意：JSON里面没有`undefined`），区别在于：
+
+- JSON的属性名必须是双引号的字符串
+- JSON最后一个属性后面不能有逗号
+- JSON中的数字类型禁止出现前导零；如果有小数点，则后面至少要有一位数字
+- JSON中的字符串只有有限的一些字符会被转义
+
+在JS中使用`JSON.stringify()`将对象转换为JSON字符串。使用`JSON.parse()`来解析JSON字符串并返回对象类型的结果。
+
 ## 使用Ajax的优缺点
 
 优点：
