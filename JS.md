@@ -155,12 +155,13 @@ var person2 = new Person('bar');
 
 优点：
 
-- 交互性更好。仅需要刷新页面的局部内容就可以实现动态渲染。
+- 交互性更好。来自服务器的新内容可以动态更改，无需重新加载整个页面。
 - 按需加载。仅需加载初始页面所需的js和css。
+- 更好的维护状态。在一个页面上，JS 变量和 DOM 状态将得到保持，因为主容器页面未被重新加载。
 
 缺点：
 - 前进后退和书签功能需要额外的工作。
-- SEO非常不友好。
+- SEO非常不友好。有些网络爬虫不执行 JS，也不会看到 JS 加载的内容。
 
 ## 解释下JSONP的原理
 
@@ -177,6 +178,8 @@ JSONP（JSON with Padding）通常用来解决浏览器中禁止跨域资源访�
 <script src="https://example.com?callback=processData"></script>
 ```
 
-但是JSONP最大的局限性就是只能使用`GET`方法。并且因为是执行跨域的JS脚本，因此有可能存在安全问题。
+请求的Response：`processData({"id":"s82m4x","name":"doggy","gendor":"unknow"});`
+
+但是JSONP最大的局限性就是只能使用`GET`方法。并且因为是执行跨域的JS脚本，因此有可能存在安全问题，需要完全信任JSONP数据的提供者。
 
 更推荐的做法是使用CORS，把JSONP作为一种备选。
